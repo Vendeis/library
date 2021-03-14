@@ -23,6 +23,12 @@ public class ApplicationUser {
         this.password = password;
         this.email = email;
     }
+    public ApplicationUser(long id, String password, String email, String verificationCode) {
+        this.id = id;
+        this.password = password;
+        this.email = email;
+        this.verificationCode = verificationCode;
+    }
 
     public ApplicationUser() {
     }

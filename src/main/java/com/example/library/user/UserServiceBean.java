@@ -17,7 +17,6 @@ public class UserServiceBean implements UserService {
 
     @Override
     public ApplicationUser saveUser(ApplicationUser user) {
-        user.setActive(false);
         userRepository.save(user);
         return user;
     }
