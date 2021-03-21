@@ -1,8 +1,12 @@
 package com.example.library.user;
 
+import com.example.library.model.Book;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "user")
 public class ApplicationUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +18,14 @@ public class ApplicationUser {
     private String verificationCode;
     private boolean isActive;
 
+    @ManyToMany
+    @JoinTable(
+            name = "rentals",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private List<Book> borrowedBooks;
+
     public long getId() {
         return id;
     }
@@ -23,11 +35,20 @@ public class ApplicationUser {
         this.password = password;
         this.email = email;
     }
+
     public ApplicationUser(long id, String password, String email, String verificationCode) {
         this.id = id;
         this.password = password;
         this.email = email;
         this.verificationCode = verificationCode;
+    }
+
+    public ApplicationUser(String password, String email, String verificationCode, boolean isActive, List<Book> borrowedBooks) {
+        this.password = password;
+        this.email = email;
+        this.verificationCode = verificationCode;
+        this.isActive = isActive;
+        this.borrowedBooks = borrowedBooks;
     }
 
     public ApplicationUser() {
@@ -67,6 +88,14 @@ public class ApplicationUser {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<Book> getBorrowedBooks() {
+        return borrowedBooks;
+    }
+
+    public void setBorrowedBooks(List<Book> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
     }
 
 }
