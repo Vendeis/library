@@ -21,16 +21,6 @@ public class UserServiceBean implements UserService {
         return user;
     }
 
-//    @Override
-//    public User changePassword(long id, User user) {
-//        User existingUser = findById(id);
-//        if(existingUser == null){
-//            return null;
-//        }
-//        existingUser.setPassword(user.getPassword());
-//        User updatedUser = userRepository.save(existingUser);
-//        return updatedUser;
-//    }
 
     @Override
     public ApplicationUser findById(long id){
@@ -54,18 +44,6 @@ public class UserServiceBean implements UserService {
 
     }
 
-//    @Override
-//    public String setConfig(UserConfig userConfig, Authentication auth){
-//        try {
-//            auth.getPrincipal();
-//            User user = userRepository.findByEmail(auth.getName());
-//            userConfig.setUser(user);
-//            userConfigRepository.save(userConfig);
-//            return "OK";
-//        }catch (RuntimeException e){
-//            return "This configuration already existed";
-//        }
-//    }
 
 //    @Override
 //    public UserConfig showConfig(Authentication auth) {

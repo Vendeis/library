@@ -1,5 +1,7 @@
-package com.example.library.user;
+package com.example.library.security;
 
+import com.example.library.user.ApplicationUser;
+import com.example.library.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
