@@ -16,11 +16,10 @@ public class Author {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Book> bookList;
 
-    public Author(String name, String surname, String nationality, List<Book> bookList) {
+    public Author(String name, String surname, String nationality) {
         this.name = name;
         this.surname = surname;
         this.nationality = nationality;
-        this.bookList = bookList;
     }
 
     public Author() {

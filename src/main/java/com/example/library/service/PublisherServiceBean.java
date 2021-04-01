@@ -41,13 +41,13 @@ public class PublisherServiceBean implements PublisherService{
     }
 
     public Publisher updatePublisher(Long id, Publisher publisher) {
-        Publisher publisherToUpdate = findById(id);
-        publisherToUpdate.setName(publisher.getName());
-        publisherToUpdate.setCity(publisher.getCity());
-        publisherToUpdate.setLanguage(publisher.getLanguage());
-        publisherToUpdate.setPublications(publisher.getPublications());
+        Publisher newPublisher = findById(id);
+        newPublisher.setName(publisher.getName());
+        newPublisher.setCity(publisher.getCity());
+        newPublisher.setLanguage(publisher.getLanguage());
+        newPublisher.setPublications(publisher.getPublications());
 
-        return publisherRepository.save(publisherToUpdate);
+        return publisherRepository.save(newPublisher);
     }
 
     public void deletePublisher(Long id) {

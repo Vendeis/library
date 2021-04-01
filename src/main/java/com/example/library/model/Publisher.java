@@ -10,19 +10,18 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
-    private String publications;
+    private int publications;
     private String city;
     private String language;
 
     @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
     private List<Book> books;
 
-    public Publisher(String name, String publications, String city, String language, List<Book> books) {
+    public Publisher(String name, int publications, String city, String language) {
         this.name = name;
         this.publications = publications;
         this.city = city;
         this.language = language;
-        this.books = books;
     }
 
     public Publisher() {
@@ -44,11 +43,11 @@ public class Publisher {
         this.name = name;
     }
 
-    public String getPublications() {
+    public int getPublications() {
         return publications;
     }
 
-    public void setPublications(String publications) {
+    public void setPublications(int publications) {
         this.publications = publications;
     }
 

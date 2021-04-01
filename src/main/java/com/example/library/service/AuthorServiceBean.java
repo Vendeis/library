@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AuthorServiceBean {
+public class AuthorServiceBean implements AuthorService {
     private AuthorRepository authorRepository;
 
     @Autowired
@@ -35,25 +35,26 @@ public class AuthorServiceBean {
         return null;
     }
 
-    public List<Author> getAllPublishers(){
+    public List<Author> getAllAuthors(){
         return authorRepository.findAll();
     }
 
-    public Author updatePublisher(Long id, Author author) {
-        Author authorToUpdate = findById(id);
-        authorToUpdate.setName(author.getName());
-        authorToUpdate.setSurname(author.getSurname());
-        authorToUpdate.setNationality(author.getNationality());
+    public Author updateAuthor(Long id, Author author) {
+        Author newAuthor = findById(id);
+        newAuthor.setName(author.getName());
+        newAuthor.setSurname(author.getSurname());
+        newAuthor.setNationality(author.getNationality());
 
-        return authorRepository.save(authorToUpdate);
+        return authorRepository.save(newAuthor);
     }
 
-    public void deletePublisher(Long id) {
+    public void deleteAuthor(Long id) {
         Author authorToDelete = findById(id);
 
         if(authorToDelete != null)
             authorRepository.deleteById(id);
     }
+
 
     private Author findById(Long id) {
         Optional<Author> authorById = authorRepository.findById(id);
