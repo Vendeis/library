@@ -1,6 +1,6 @@
-package com.example.library.service;
+package com.example.library.publisher;
 
-import com.example.library.model.Publisher;
+import com.example.library.publisher.Publisher;
 
 import java.util.List;
 

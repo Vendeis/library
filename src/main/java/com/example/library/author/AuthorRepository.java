@@ -1,6 +1,6 @@
-package com.example.library.repository;
+package com.example.library.author;
 
-import com.example.library.model.Author;
+import com.example.library.author.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,9 @@
-package com.example.library.model;
+package com.example.library.book;
 
+import com.example.library.author.Author;
+import com.example.library.publisher.Publisher;
 import com.example.library.user.ApplicationUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -9,29 +12,29 @@ import java.util.List;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
+    @JsonIgnore
     @ManyToMany
     private List<ApplicationUser> users;
 
     private String title;
     private String description;
 
-    public Book(Author author, Publisher publisher, String title, String description, List<ApplicationUser> users) {
+    public Book(Author author, Publisher publisher, String title, String description) {
         this.author = author;
         this.publisher = publisher;
         this.title = title;
         this.description = description;
-        this.users = users;
     }
 
     public Book() {

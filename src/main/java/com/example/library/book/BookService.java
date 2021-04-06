@@ -1,8 +1,7 @@
-package com.example.library.service;
+package com.example.library.book;
 
-import com.example.library.model.Author;
-import com.example.library.model.Book;
-import com.example.library.model.Publisher;
+import com.example.library.author.Author;
+import com.example.library.book.Book;
 
 import java.util.List;
 

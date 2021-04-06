@@ -1,4 +1,7 @@
-package com.example.library.model;
+package com.example.library.author;
+
+import com.example.library.book.Book;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -7,13 +10,16 @@ import java.util.List;
 public class Author {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private long id;
     private String name;
     private String surname;
     private String nationality;
 
+
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Book> bookList;
 
     public Author(String name, String surname, String nationality) {
@@ -23,6 +29,9 @@ public class Author {
     }
 
     public Author() {
+    }
+    public Author(String surname) {
+        this.surname = surname;
     }
 
     public long getId() {

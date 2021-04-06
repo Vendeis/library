@@ -1,4 +1,7 @@
-package com.example.library.model;
+package com.example.library.publisher;
+
+import com.example.library.book.Book;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -7,13 +10,15 @@ import java.util.List;
 public class Publisher {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private long id;
     private String name;
     private int publications;
     private String city;
     private String language;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
     private List<Book> books;
 
@@ -26,7 +31,9 @@ public class Publisher {
 
     public Publisher() {
     }
-
+    public Publisher(String name) {
+        this.name = name;
+    }
     public long getId() {
         return id;
     }

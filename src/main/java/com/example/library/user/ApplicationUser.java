@@ -1,6 +1,6 @@
 package com.example.library.user;
 
-import com.example.library.model.Book;
+import com.example.library.book.Book;
 
 import javax.persistence.*;
 import java.util.List;

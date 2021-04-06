@@ -28,14 +28,4 @@ public class UserController {
     public void login(@RequestBody ApplicationUser user){
 
     }
-
-//    @PostMapping(value = "/config")
-//    public String setConfig(@RequestBody UserConfig userConfig, Authentication auth){
-//        return userService.setConfig(userConfig, auth);
-//    }
-//
-//    @GetMapping(value = "/config/show")
-//    public UserConfig showConfig(Authentication auth){
-//        return userService.showConfig(auth);
-//    }
 }

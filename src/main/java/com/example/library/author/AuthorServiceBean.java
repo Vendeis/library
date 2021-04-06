@@ -1,7 +1,8 @@
-package com.example.library.service;
+package com.example.library.author;
 
-import com.example.library.model.Author;
-import com.example.library.repository.AuthorRepository;
+import com.example.library.author.Author;
+import com.example.library.author.AuthorRepository;
+import com.example.library.author.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.example.library.repository;
+package com.example.library.publisher;
 
-import com.example.library.model.Publisher;
+import com.example.library.publisher.Publisher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
