@@ -30,19 +30,25 @@ public class BookServiceBean implements BookService {
     public Book createBook(Book book) {
         Book newBook = new Book();
         Author author = book.getAuthor();
+        Publisher publisher = book.getPublisher();
         String authorName = author.getName();
+        String publisherName = publisher.getName();
 
-        if (bookRepository.findByAuthorNameAndTitle(authorName, book.getTitle()).isPresent())
+        if (bookRepository.findByAuthorNameAndTitle(authorName, book.getTitle()).isPresent()
+        && bookRepository.findByPublisherNameAndTitle(publisherName, book.getTitle()).isPresent())
             return null;
 
-        Book preparedBook = prepareBookToProcess(book, newBook, authorName);
+        Book preparedBook = prepareBookToProcess(book, newBook, author);
         return bookRepository.save(preparedBook);
     }
 
-    private Book prepareBookToProcess(Book processingBook, Book bookToSave, String authorName) {
+    private Book prepareBookToProcess(Book processingBook, Book bookToSave, Author author) {
 
-        setBookAuthorFromDBorCreateNewIfNotExists(bookToSave, authorName);
+        setBookAuthorFromDBorCreateNewIfNotExists(bookToSave, author);
+        System.out.println(bookToSave.getAuthor());
+
         setBookPublisherFromDBorCreateNewIfNotExists(processingBook, bookToSave);
+        System.out.println(bookToSave.getPublisher());
 
         bookToSave.setTitle(processingBook.getTitle());
         bookToSave.setDescription(processingBook.getDescription());
@@ -52,28 +58,26 @@ public class BookServiceBean implements BookService {
     }
 
 
-    private void setBookAuthorFromDBorCreateNewIfNotExists(Book bookToSave, String authorName) {
-        Author authorByName = authorService.getAuthorByName(authorName);
+    private void setBookAuthorFromDBorCreateNewIfNotExists(Book bookToSave, Author author) {
+        Author authorByName = authorService.getAuthorByName(author.getName());
         if(authorByName != null) {
             bookToSave.setAuthor(authorByName);
         }
         else{
-        Author newAuthor = new Author(authorName);
-        bookToSave.setAuthor(newAuthor);
-        authorService.createAuthor(newAuthor);
+        Author author2 = new Author(author.getName(),author.getSurname(),author.getNationality());
+        bookToSave.setAuthor(author2);
+        authorService.createAuthor(author2);
         }
     }
     private void setBookPublisherFromDBorCreateNewIfNotExists(Book processingBook, Book bookToSave) {
 
         Publisher publisher = processingBook.getPublisher();
-
         String name = publisher.getName();
         String language = publisher.getLanguage();
         int publications = publisher.getPublications();
         String city = publisher.getCity();
 
         Publisher publisher2 = publisherService.getPublisherByNameAndLanguage(name,language);
-
 
         if(publisher2 != null) {
             bookToSave.setPublisher(publisher2);
