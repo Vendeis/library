@@ -36,7 +36,7 @@ public class BookServiceBean implements BookService {
             return null;
 
         Book preparedBook = prepareBookToProcess(book, newBook, authorName);
-        return bookRepository.save(book);
+        return bookRepository.save(preparedBook);
     }
 
     private Book prepareBookToProcess(Book processingBook, Book bookToSave, String authorName) {
@@ -66,17 +66,20 @@ public class BookServiceBean implements BookService {
     private void setBookPublisherFromDBorCreateNewIfNotExists(Book processingBook, Book bookToSave) {
 
         Publisher publisher = processingBook.getPublisher();
+
         String name = publisher.getName();
-        String language = publisher.getCity();
+        String language = publisher.getLanguage();
         int publications = publisher.getPublications();
         String city = publisher.getCity();
 
         Publisher publisher2 = publisherService.getPublisherByNameAndLanguage(name,language);
-        System.out.println(publisher2 == null);
+
+
         if(publisher2 != null) {
             bookToSave.setPublisher(publisher2);
         }
         else{
+            System.out.println("publisher2 is null");
             Publisher publisher3 = new Publisher(name, publications, city, language);
             bookToSave.setPublisher(publisher3);
             publisherService.createPublisher(publisher3);
